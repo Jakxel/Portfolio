@@ -20,7 +20,7 @@ const Contact = () => {
     };
 
     return (
-        <div style={{ maxWidth: 500, margin: "40px auto", padding: 24 }}>
+        <div className="page">
             <h2>Contacto</h2>
             {submitted ? (
                 <div>
@@ -28,7 +28,7 @@ const Contact = () => {
                 </div>
             ) : (
                 <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: 16 }}>
+                    <div className="form-group">
                         <label>
                             Nombre:
                             <input
@@ -37,11 +37,10 @@ const Contact = () => {
                                 value={form.name}
                                 onChange={handleChange}
                                 required
-                                style={{ width: "100%", padding: 8, marginTop: 4 }}
                             />
                         </label>
                     </div>
-                    <div style={{ marginBottom: 16 }}>
+                    <div className="form-group">
                         <label>
                             Email:
                             <input
@@ -50,11 +49,10 @@ const Contact = () => {
                                 value={form.email}
                                 onChange={handleChange}
                                 required
-                                style={{ width: "100%", padding: 8, marginTop: 4 }}
                             />
                         </label>
                     </div>
-                    <div style={{ marginBottom: 16 }}>
+                    <div className="form-group">
                         <label>
                             Mensaje:
                             <textarea
@@ -63,11 +61,10 @@ const Contact = () => {
                                 onChange={handleChange}
                                 required
                                 rows={5}
-                                style={{ width: "100%", padding: 8, marginTop: 4 }}
                             />
                         </label>
                     </div>
-                    <button type="submit" style={{ padding: "8px 24px" }}>
+                    <button type="submit">
                         Enviar
                     </button>
                 </form>

@@ -1,39 +1,40 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function ThemeToggle() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "dark";
-  });
+const THEME_KEY = "theme";
+const DARK_CLASS = "dark-theme";
+
+function getInitialTheme() {
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved) return saved;
+    // Optional: use prefers-color-scheme
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+  }
+  return "light";
+}
+
+export default function ThemeToggler() {
+  const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(() => {
     const root = document.documentElement;
-
-    if (theme === "light") {
-      root.style.setProperty("--background-color", "#ffffff");
-      root.style.setProperty("--text-color", "#1a1a1a");
-      root.style.setProperty("--title-color", "#1a1a1a");
-      root.style.setProperty("--card-background", "#ffffff");
-      root.style.setProperty("--border-color", "#D1D5DB");
-      root.style.setProperty("color-scheme", "light");
+    if (theme === "dark") {
+      root.classList.add(DARK_CLASS);
     } else {
-      root.style.setProperty("--background-color", "rgb(0, 0, 0)");
-      root.style.setProperty("--text-color", "#697477");
-      root.style.setProperty("--title-color", "#2A3B47");
-      root.style.setProperty("--card-background", "#F9FAFB");
-      root.style.setProperty("--border-color", "#D1D5DB");
-      root.style.setProperty("color-scheme", "dark");
+      root.classList.remove(DARK_CLASS);
     }
-
-    localStorage.setItem("theme", theme);
+    localStorage.setItem(THEME_KEY, theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
     <button onClick={toggleTheme}>
-      {theme === "light" ? "🌙" : "🌞"}
+      {theme === "dark" ? "☾" : "᮰"}
     </button>
   );
 }

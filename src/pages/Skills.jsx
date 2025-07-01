@@ -11,13 +11,13 @@ const skills = [
 ];
 
 const Skills = () => (
-    <div style={{ maxWidth: 600, margin: '0 auto', padding: '2rem' }}>
+    <div className="page">
         <h1>Mis Habilidades</h1>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ul className="skills-list">
             {skills.map((skill) => (
-                <li key={skill.name} style={{ marginBottom: '1rem', background: '#f5f5f5', padding: '1rem', borderRadius: '8px' }}>
+                <li key={skill.name} className="skill-item">
                     <strong>{skill.name}</strong>
-                    <span style={{ float: 'right', color: '#555' }}>{skill.level}</span>
+                    <span className="skill-level">{skill.level}</span>
                 </li>
             ))}
         </ul>
